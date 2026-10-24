@@ -1,0 +1,427 @@
+/**
+ * PhishLens Chrome Extension — Popup Stylesheet
+ * Matches the PhishLens dark navy (#0b0f19) & cyan (#38bdf8) design system.
+ */
+
+:root {
+  --bg-canvas: #0b0f19;
+  --bg-surface: #0f172a;
+  --bg-elevated: #131c31;
+  --border-subtle: #1e293b;
+  --border-strong: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-cyan: #38bdf8;
+  --accent-cyan-strong: #0284c7;
+  --accent-cyan-hover: #0ea5e9;
+  --status-suspicious-text: #f87171;
+  --status-suspicious-bg: rgba(239, 68, 68, 0.1);
+  --status-suspicious-border: rgba(239, 68, 68, 0.35);
+  --status-review-text: #fbbf24;
+  --status-review-bg: rgba(245, 158, 11, 0.1);
+  --status-review-border: rgba(245, 158, 11, 0.35);
+  --status-clean-text: #34d399;
+  --status-clean-bg: rgba(16, 185, 129, 0.1);
+  --status-clean-border: rgba(16, 185, 129, 0.35);
+  --status-unavailable-text: #94a3b8;
+  --status-unavailable-bg: rgba(148, 163, 184, 0.08);
+  --status-unavailable-border: rgba(148, 163, 184, 0.25);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 360px;
+  min-width: 320px;
+  max-width: 100%;
+  min-height: 420px;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.popup-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+  padding: 16px;
+  gap: 12px;
+}
+
+/* Header */
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.section-kicker {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent-cyan);
+  margin-top: 1px;
+}
+
+/* Target Host Card */
+.target-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.target-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.target-hostname {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+.target-hostname.muted {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.target-meta {
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Primary Action Button */
+.primary-btn {
+  width: 100%;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background-color: var(--accent-cyan-strong);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 140ms ease, opacity 140ms ease;
+  white-space: nowrap;
+}
+
+.primary-btn:hover:not(:disabled) {
+  background-color: var(--accent-cyan-hover);
+}
+
+.primary-btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+.primary-btn:disabled {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Compact Results Area */
+.results-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.state-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.state-card.ready {
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 150px;
+}
+
+.state-card.suspicious {
+  border-color: var(--status-suspicious-border);
+}
+
+.state-card.review {
+  border-color: var(--status-review-border);
+}
+
+.state-card.clean {
+  border-color: var(--status-clean-border);
+}
+
+.state-card.unavailable {
+  border-color: var(--status-unavailable-border);
+}
+
+.status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.status-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.status-title-row.suspicious {
+  color: var(--status-suspicious-text);
+}
+
+.status-title-row.review {
+  color: var(--status-review-text);
+}
+
+.status-title-row.clean {
+  color: var(--status-clean-text);
+}
+
+.status-title-row.unavailable {
+  color: var(--status-unavailable-text);
+}
+
+.status-summary {
+  font-size: 12px;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+
+.status-summary.muted {
+  color: var(--text-secondary);
+}
+
+/* Subsections inside Result Card */
+.subsection {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subsection-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.finding-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.finding-item {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.finding-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.finding-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.finding-severity {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.finding-severity.high {
+  color: var(--status-suspicious-text);
+}
+
+.finding-severity.medium {
+  color: var(--status-review-text);
+}
+
+.finding-severity.low,
+.finding-severity.info {
+  color: var(--accent-cyan);
+}
+
+.finding-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.finding-evidence {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+  margin-top: 2px;
+}
+
+/* Observations Grid */
+.obs-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.obs-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+}
+
+.obs-label {
+  color: var(--text-muted);
+}
+
+.obs-value {
+  color: var(--text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Recommended Action & Scope Note */
+.action-box {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11.5px;
+  color: var(--text-primary);
+}
+
+.action-box-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  margin-bottom: 2px;
+}
+
+.scope-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Spinner */
+@keyframes phishlens-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-icon {
+  animation: phishlens-spin 0.85s linear infinite;
+}
+
+/* Footer Privacy Note */
+.privacy-footer {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
